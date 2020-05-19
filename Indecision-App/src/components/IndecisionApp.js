@@ -5,17 +5,11 @@ import Options from './Options';
 import Header from './Header';
 import Action from './Action';
 class IndecisionApp extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handleDeleteOption = this.handleDeleteOption.bind(this);
-        this.handleClick = this.handleClick.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.state = {
-            options : props.options
-
-        }
+    state = {
+        options : []
     }
+    
+    
     componentWillMount(){
         try{
         const json = localStorage.getItem('option');
@@ -30,22 +24,22 @@ class IndecisionApp extends React.Component {
         }
         
     }
-    componentDidUpdate(prevProps,prevState){
+    componentDidUpdate (prevProps,prevState){
         if(prevState.options.length !==this.state.options.length){
             const json = JSON.stringify(this.state.options)
             localStorage.setItem('option',json);
         }
     }
-    handleClick() {
+    handleClick=()=> {
         const opt = this.state.options[Math.floor(Math.random()*this.state.options.length)]
        alert(opt);
    }
-    handleDeleteOptions (){
+    handleDeleteOptions =()=>{
       
         //with out return key word wraping object
         this.setState(()=>({options:[]}));
     }
-    handleDeleteOption (option){
+    handleDeleteOption =(option)=>{
       
         
       this.setState((prev)=>{
@@ -56,7 +50,7 @@ class IndecisionApp extends React.Component {
 
     });
     }
-    handleAddOption(opt){
+    handleAddOption= (opt)=>{
         ///chk string
         if(!opt){
             return 'enter a valid info';
