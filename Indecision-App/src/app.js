@@ -18,12 +18,7 @@ const Layout =(props)=>{ //parent
     );
 }
 
-ReactDOM.render(<Layout>
-      <div>
-            <h2>Subtitle</h2>
-        </div>
-</Layout>, //passing child
-     document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
 
 
 

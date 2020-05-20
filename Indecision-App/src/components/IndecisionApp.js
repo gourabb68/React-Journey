@@ -4,9 +4,11 @@ import AddOption from './AddOption';
 import Options from './Options';
 import Header from './Header';
 import Action from './Action';
+import OptionModal from './OptionModal';
 class IndecisionApp extends React.Component {
     state = {
-        options : []
+        options : [],
+        selectedOptions: undefined
     }
     
     
@@ -30,9 +32,12 @@ class IndecisionApp extends React.Component {
             localStorage.setItem('option',json);
         }
     }
+    handleSelectedOptionClosed =()=>{
+        this.setState(()=>({selectedOptions:undefined}))
+    }
     handleClick=()=> {
         const opt = this.state.options[Math.floor(Math.random()*this.state.options.length)]
-       alert(opt);
+      this.setState(()=>({selectedOptions:opt}))
    }
     handleDeleteOptions =()=>{
       
@@ -76,6 +81,8 @@ class IndecisionApp extends React.Component {
                  handleDeleteOption={this.handleDeleteOption} 
                 />
                 <AddOption handleAddOption = {this.handleAddOption}/>
+        
+                <OptionModal selectedOptions={this.state.selectedOptions} handleSelectedOptionClosed={this.handleSelectedOptionClosed}/>
             </div>
         );
     }
