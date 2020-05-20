@@ -8,7 +8,35 @@ const app = {
 
 }
 
-ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
+//passing childer to component
+const Layout =(props)=>{ //parent
+    return (
+        <div>
+            <h1> Title</h1>
+            {props.children} 
+        </div>
+    );
+}
+
+ReactDOM.render(<Layout>
+      <div>
+            <h2>Subtitle</h2>
+        </div>
+</Layout>, //passing child
+     document.getElementById('app'));
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //with old syntax create property 
 // of instance using constructor
@@ -38,3 +66,7 @@ class NewSyntax{
 const newSyntax = new NewSyntax();
 console.log(newSyntax.getName())
 console.log(newSyntax);
+
+
+
+
