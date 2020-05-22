@@ -4,8 +4,8 @@ import Modal from 'react-modal';
 const OptionModal= (props)=>{
      return(
          <Modal
-         isOpen={!!props.selectedOptions}
-         onRequestClose={props.handleSelectedOptionClosed}
+         isOpen={!!props.selectedOptions} //when it will open when closed take boolean
+         onRequestClose={props.handleSelectedOptionClosed} // using esc or click on outside should it close or not
          contentLabel="Selected Option Modal"
             >
              <div>
