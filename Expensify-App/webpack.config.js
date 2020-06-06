@@ -1,7 +1,7 @@
 const path = require('path'); //node module helps to join path
 module.exports ={
     // "entry": "./src/app.js",//put the source file..main file ..where should webpack start from
-    "entry": "./src/playground/redux-101.js",
+    "entry": "./src/playground/redux-expensify.js",
     "output":{
         "path": path.join(__dirname,'public'),  //absolute path from root user complete path 
         "filename":  'bundle.js'//name of the file 

@@ -17,29 +17,48 @@ const decrementCount =({decrementBy=1}) =>({
 const reset =() =>({ 
     type: 'RESET'
 });
-const store = createStore((state = {count: 0},action)=>{
+
+// //not pure function
+// let a=10;
+// const add =(b)=>{
+//     return a+b;//here a is not the i/p 
+//     //that is global variable so output is 
+//     //not determined only by input so not pure
+// }
+//here fn is not pure as it is interacing 
+//with thing outside of its scope
+let result;
+//pure function
+const add =(a,b)=>{
+    return a+b;
+}
+
+
+//creating reducer
+const countReducer = (state = {count: 0},action)=>{
  
- switch(action.type){
-     case 'INCREMENT':
-         const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
-        return{
-            count: state.count+ incrementBy//state is prev state
-        };
-        case 'DECREMENT':
-            const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
-            return{
-                count: state.count-decrementBy//state is prev state
-            }; 
-        case 'RESET':
-            return{
-                count: 0
-            };
-
-    default: 
-       return state;
- }
-
-});
+    switch(action.type){
+        case 'INCREMENT':
+            const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy : 1;
+           return{
+               count: state.count+ incrementBy//state is prev state
+           };
+           case 'DECREMENT':
+               const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy : 1;
+               return{
+                   count: state.count-decrementBy//state is prev state
+               }; 
+           case 'RESET':
+               return{
+                   count: 0
+               };
+   
+       default: 
+          return state;
+    }
+   
+   }
+const store = createStore(countReducer);
 
 store.subscribe(()=>{
     console.log(store.getState());
