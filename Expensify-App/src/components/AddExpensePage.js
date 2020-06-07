@@ -1,17 +1,22 @@
 import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import ExpenseForm from './ExpenseForm';
+import {connect} from 'react-redux';
+import { addExpense} from '../actions/expenses'
 const AddExpensePage = (props) =>{
     console.log(props);
     return (
         <div>
-        this is from my .AddExpensePage page {props.match.params.id}
-        <NavLink to="/" activeClassName="is-active" exact={true}> Go Home </NavLink>           
-        <NavLink to="/help" activeClassName="is-active">Help Page</NavLink>
-        <NavLink to="/create"activeClassName="is-active">Create Page</NavLink>
+            <h1>Add Expense</h1>
+        <ExpenseForm 
+        onSubmit={(expenses)=>{
+            props.dispatch(addExpense(expenses));
+            props.history.push('/');//switch me to the dashboard page
+        }}
+        />
          
     </div>
     );
  
 };
 
-export default AddExpensePage;
+export default connect()(AddExpensePage);
