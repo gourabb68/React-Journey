@@ -11,14 +11,18 @@ console.log(now)//get moment object
 console.log(now.format('MMM Do, YYYY'))//Jun 8th, 2020
 
 class ExpenseForm extends React.Component{
-state ={
-    description: '',
-    note: '',
-    amount: undefined,
-    createdAt: moment(),
-    calenderFocused: false,
-    error: ''
-}
+    constructor(props){
+        super(props);
+        this.state ={
+            description: props.expenses? props.expenses.description: '',
+            note: props.expenses? props.expenses.note:'',
+            amount: props.expenses?(props.expenses.amount/100).toString():'',
+            createdAt: props.expenses?moment(props.expenses.createdAt):moment(),
+            calenderFocused: false,
+            error: ''
+        }
+    }
+
 onDescriptionChange =(e) =>{
     const description = e.target.value;
     this.setState(()=>({description}))
