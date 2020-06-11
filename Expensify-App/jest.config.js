@@ -1,9 +1,8 @@
-// jest.config.js
-const {defaults} = require('jest-config');
-module.exports = {
-  // ...
-//   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
-// testTimeout : 30000
-  // ...
-};
-//   jest.setTimeout(30000)
+{
+  setupFiles: [
+    "raf/polyfill",
+    //normally location starts with node module but
+    //  <root> means it willstart from root dir
+    "<rootDir>/src/tests/setupTests.js"
+  ]
+}
