@@ -3,16 +3,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import ExpenseListItem from './ExpenseListItem';
 import selectExpenses from '../selectors/expenses'
-const  ExpenseList = (props) =>{
+export const  ExpenseList = (props) =>{
     return (
+       
         <div>
+        
        <h1>ExpenseList</h1>
        {props.expenses.length}
        {props.expenses.map((expense)=>{
            return <ExpenseListItem key={expense.id}{...expense}/>
        })
        }
-       {props.filters.text}
     </div>
     );
    
@@ -32,8 +33,8 @@ const  ExpenseList = (props) =>{
 //creating a funciton explicitly to get data from store
 const mapStateToComponent = (state)=>{//this return object can be accessed through props of regular comp
     return {
-        expenses: selectExpenses(state.expenses,state.filters),
-        filters: state.filters
+        expenses: selectExpenses(state.expenses,state.filters)
+        
     };
 }
 const ConnectedExpensesList= connect(mapStateToComponent)(ExpenseList)

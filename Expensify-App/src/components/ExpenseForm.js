@@ -4,11 +4,11 @@ import moment from 'moment';
 //import date picker library
 import {SingleDatePicker} from 'react-dates';
 //import cssfile for date picker library
-import 'react-dates/lib/css/_datepicker.css';
+// import 'react-dates/lib/css/_datepicker.css';
 const now = moment();
-console.log(now)//get moment object
+// console.log(now)//get moment object
 //get date
-console.log(now.format('MMM Do, YYYY'))//Jun 8th, 2020
+// console.log(now.format('MMM Do, YYYY'))//Jun 8th, 2020
 
 class ExpenseForm extends React.Component{
     constructor(props){
@@ -57,7 +57,7 @@ onSubmit = (e)=>{
     if(!this.state.description || !this.state.amount){
         this.setState(()=>({error: 'Please provide Description and amount'}))
         //set error state equal to 'Please provide dec and amount
-        console.log(this.state.error)
+        // console.log(this.state.error)
     }else{
         this.setState(()=>({error: ''}))
         this.props.onSubmit({
@@ -94,7 +94,7 @@ onSubmit = (e)=>{
 
                     </textarea>
                     <button>Add Expense</button>
-                    {console.log(this.state.amount)}
+                    {/* {console.log(this.state.amount)} */}
 
                     <SingleDatePicker
                     date ={this.state.createdAt}

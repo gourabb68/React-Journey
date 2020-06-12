@@ -3,31 +3,43 @@ import {Link, NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ExpenseForm from './ExpenseForm'
 import {editExpense} from '../actions/expenses';
-import {removeExpense} from '../actions/expenses'
-const EditExpensePage = (props) =>{
-    console.log(props);
-    return (
-        <div>
+import {removeExpense} from '../actions/expenses';
+
+
+export class EditExpensePage extends React.Component{
+    onSubmit = (expenses)=>{                   
+            this.props.editExpense(this.props.expenses.id,expenses);
+           this.props.history.push('/');//switch me to the dashboard page      
+    };
+
+    onRemove = ()=>{
+               
+        this.props.removeExpense({id:this.props.expenses.id});
+        this.props.history.push('/');
+    }
+
+    render(){
+        return(
+            <div>
             
-        this is from my EditExpensePage page {props.match.params.id}
-        <ExpenseForm 
-        expenses={props.expenses}
-        onSubmit={(expenses)=>{
             
-             props.dispatch(editExpense(props.expenses.id,expenses));
-            props.history.push('/');//switch me to the dashboard page
-        }}
-        />
-          <button onClick={()=>{
-           
-          props.dispatch(removeExpense({id:props.expenses.id}));
-          props.history.push('/');
-          }}>Remove </button>
-          
-    </div>
-    );
- 
-};
+            <ExpenseForm 
+            expenses={this.props.expenses}
+            onSubmit={this.onSubmit}
+            />
+              <button onClick={this.onRemove}>Remove </button>
+              
+        </div>
+        )
+    }
+}
+
+const mapDispatchToProps =(dispatch,props) =>({
+   
+    editExpense: (id,expenses)=>dispatch(editExpense(id,expenses)),
+    removeExpense: (id)=> dispatch(removeExpense({id}))
+    
+})
 
 const mapStoreToProps =(state,props)=>{
 return {
@@ -36,4 +48,4 @@ return {
     })
 };
 }
-export default connect(mapStoreToProps)(EditExpensePage);
+export default connect(mapStoreToProps,mapDispatchToProps)(EditExpensePage);

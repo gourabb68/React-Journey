@@ -9,7 +9,7 @@
     "build": "webpack --watch",
     "build-babel": "babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch",
     "dev-server": "webpack-dev-server",
-    "test": "jest --config=jest.config.js"
+    "test": "jest --config=jest.config.json"
   },
   "dependencies": {
     "babel-cli": "6.24.1",
@@ -22,6 +22,7 @@
     "css-loader": "0.28.4",
     "enzyme": "3.0.0",
     "enzyme-adapter-react-16": "1.0.0",
+    "enzyme-to-json": "3.0.1",
     "jest": "20.0.4",
     "live-server": "^1.2.1",
     "moment": "2.18.1",

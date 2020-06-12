@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render expense list item with expense 1`] = `
+<div>
+  <Link
+    activeClassName="is-active"
+    exact={true}
+    replace={false}
+    to="/edit/abcdef"
+  >
+    <h3>
+      januray rent
+    </h3>
+  </Link>
+  <p>
+    54220
+     - 
+    0
+  </p>
+</div>
+`;
