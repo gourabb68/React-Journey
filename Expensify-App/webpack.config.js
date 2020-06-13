@@ -1,5 +1,11 @@
 const path = require('path'); //node module helps to join path
-module.exports ={
+//importing for creating diff css file
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+module.exports =(env)=>{
+    const isProduction = env === 'production';
+    //creating instance and passing name of the file where it is going to dump css file
+    const CSSExtract = new  ExtractTextPlugin('styles.css');
+    return {
     "entry": "./src/app.js",//put the source file..main file ..where should webpack start from
     // "entry": "./src/playground/hoc.js",
     "output":{
@@ -13,18 +19,31 @@ module.exports ={
             "exclude": /node_modules/ 
         },{
             "test": /\.s?css$/, //specifying which file is looking for
-            "use":[ //use allow array of loader
-                "style-loader",
-                "css-loader",
-                "sass-loader"
-
-            ]
+            "use": CSSExtract.extract({
+                "use": [                    
+                    {
+                        "loader": 'css-loader',
+                        "options": {
+                          "sourceMap": true
+                        }
+                      },
+                      {
+                        "loader": 'sass-loader',
+                        "options": {
+                          "sourceMap": true
+                        }
+                      }
+                ] 
+            })
         }]
     },
-    "devtool": "cheap-module-eval-source-map",
+    "plugins": [
+        CSSExtract
+    ],
+    "devtool": isProduction? "source-map": "inline-source-map",
     "devServer":{
         "contentBase":  path.join(__dirname,'public'),  //absolute path from root user complete
         "historyApiFallback": true
     }
-
+    }
 }
