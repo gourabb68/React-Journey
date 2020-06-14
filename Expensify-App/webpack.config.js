@@ -9,7 +9,7 @@ module.exports =(env)=>{
     "entry": "./src/app.js",//put the source file..main file ..where should webpack start from
     // "entry": "./src/playground/hoc.js",
     "output":{
-        "path": path.join(__dirname,'public'),  //absolute path from root user complete path 
+        "path": path.join(__dirname,'public','dist'),  //absolute path from root user complete path 
         "filename":  'bundle.js'//name of the file 
     },
     "module":{
@@ -43,7 +43,8 @@ module.exports =(env)=>{
     "devtool": isProduction? "source-map": "inline-source-map",
     "devServer":{
         "contentBase":  path.join(__dirname,'public'),  //absolute path from root user complete
-        "historyApiFallback": true
+        "historyApiFallback": true,
+        "publicPath": '/dist/'
     }
     }
 }
