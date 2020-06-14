@@ -62,7 +62,7 @@ onSubmit = (e)=>{
         this.setState(()=>({error: ''}))
         this.props.onSubmit({
             description: this.state.description,
-            amount: parseInt(this.state.amount,10)*100, //convert string to no
+            amount: parseFloat(this.state.amount,10)*100, //convert string to no
             createdAt: this.state.createdAt.valueOf() ,//moment to unix timestamp
             note: this.state.note
         })
