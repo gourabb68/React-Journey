@@ -21,7 +21,6 @@ test('Should be ADD EXPENSE',()=>{
     const action = addExpense(addState);
     const state =expenseReducer(defaultState,action);
     expect(state).toEqual([{
-        id: expect.any(String),
         description : 'Rent',
         note : '',
         amount : 200,
