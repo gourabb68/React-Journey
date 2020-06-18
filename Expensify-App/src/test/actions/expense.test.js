@@ -11,7 +11,7 @@ const expense =  [{
     createdAt: 0
   }]
 const createMockStore = configureMockStore([thunk]);
-
+//using mocking store
 test('should. add expense to data base and store',(done)=>{
     const  store = createMockStore();
     const expenseData ={
