@@ -1,7 +1,9 @@
 //need access of expense action generator
-import {startAddExpense,addExpense, editExpense, removeExpense} from '../../actions/expenses';
+import {startAddExpense,addExpense, editExpense, removeExpense, setExpenses,startSetExpenses} from '../../actions/expenses';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
+import  database  from './../../firebase/firebase';
+import expenseReducer from '../../reducers/expenses';
 
 const expense =  [{
     id: 'abcdef',
@@ -9,7 +11,23 @@ const expense =  [{
     note: 'This was the final payment',
     amount: 54200,
     createdAt: 0
+  },
+  {
+    id: 'jkl',
+    description: 'feb rent',
+    note: 'This was the initial payment',
+    amount: 54200,
+    createdAt: 0
   }]
+
+  beforeEach((done)=>{
+      const expenseData ={};
+      expense.forEach(({id,description,note,amount,createdAt})=>{
+        expenseData[id] = {description,note,amount,createdAt}
+      })
+      database.ref('expenses').set(expenseData).then(()=> done());
+      //test case  only will run when done() callback gets called
+  })
 const createMockStore = configureMockStore([thunk]);
 //using mocking store
 test('should. add expense to data base and store',(done)=>{
@@ -95,3 +113,35 @@ test('should. set up edit expense action object',() =>{
 //          });
    
 // });
+
+test('should set up set expense action object with data',()=>{
+const action = setExpenses(expense);
+expect(action).toEqual({
+    type: 'SET_EXPENSE',
+    expense
+})
+})
+
+
+//make sure set expense actually work
+
+test('should set expenses',()=>{
+    const action ={
+        type: 'SET_EXPENSE',
+        expense: [expense[0]]
+    }
+    const state = expenseReducer(expense,action);
+    expect(state).toEqual([expense[0]])
+})
+
+test('should fetch the expense from firebase',()=>{
+    const store = createMockStore({});
+    store.dispatch(startSetExpenses()).then(()=>{
+        const actions = store.getActions();
+        expect(actions[0]).toEqual({
+            type: 'SET_EXPENSE',
+            expense
+        })
+        done();
+    })
+})

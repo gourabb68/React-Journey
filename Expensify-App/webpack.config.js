@@ -1,5 +1,5 @@
 const path = require('path'); //node module helps to join path
-import webpack from 'webpack';
+const webpack =require('webpack');
 //importing for creating diff css file
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 //process.env.NODE_ENV
