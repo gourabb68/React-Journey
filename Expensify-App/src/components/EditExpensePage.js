@@ -2,13 +2,13 @@ import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import {connect} from 'react-redux';
 import ExpenseForm from './ExpenseForm'
-import {editExpense} from '../actions/expenses';
+import {startEditExpense} from '../actions/expenses';
 import {startRemoveExpense} from '../actions/expenses';
 
 
 export class EditExpensePage extends React.Component{
     onSubmit = (expenses)=>{                   
-            this.props.editExpense(this.props.expenses.id,expenses);
+            this.props.startEditExpense(this.props.expenses.id,expenses);
            this.props.history.push('/');//switch me to the dashboard page      
     };
 
@@ -36,7 +36,7 @@ export class EditExpensePage extends React.Component{
 
 const mapDispatchToProps =(dispatch,props) =>({
    
-    editExpense: (id,expenses)=>dispatch(editExpense(id,expenses)),
+    startEditExpense: (id,expenses)=>dispatch(startEditExpense(id,expenses)),
     startRemoveExpense: (id)=> dispatch(startRemoveExpense({id}))
     
 })
