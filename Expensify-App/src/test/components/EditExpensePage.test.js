@@ -10,16 +10,16 @@ const expenses =  [{
 }]
 
 
-let editExpense, removeExpense, history, wrapper;
+let editExpense, startRemoveExpense, history, wrapper;
 
 beforeEach(() => {
   editExpense = jest.fn();
-  removeExpense = jest.fn();
+  startRemoveExpense = jest.fn();
   history = { push: jest.fn() };
   wrapper = shallow(
     <EditExpensePage
       editExpense={editExpense}
-      removeExpense={removeExpense}
+      startRemoveExpense={startRemoveExpense}
       history={history}
       expenses={expenses[0]}
     />

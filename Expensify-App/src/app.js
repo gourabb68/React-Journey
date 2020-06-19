@@ -37,8 +37,9 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
 //when the expense is fetched we will show it
 store.dispatch(startSetExpenses()).then(()=>{
-
+    console.log(store.getState())
+    ReactDOM.render(jsx, document.getElementById('app'));
 })
 
-ReactDOM.render(jsx, document.getElementById('app'));
+
 
