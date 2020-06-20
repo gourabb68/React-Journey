@@ -9,13 +9,13 @@ import {startRemoveExpense} from '../actions/expenses';
 export class EditExpensePage extends React.Component{
     onSubmit = (expenses)=>{                   
             this.props.startEditExpense(this.props.expenses.id,expenses);
-           this.props.history.push('/');//switch me to the dashboard page      
+           this.props.history.push('/dashboard');//switch me to the dashboard page      
     };
 
     onRemove = ()=>{
                
         this.props.startRemoveExpense({id:this.props.expenses.id});
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
     }
 
     render(){

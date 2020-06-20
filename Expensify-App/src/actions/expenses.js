@@ -16,11 +16,12 @@ export const startAddExpense =(
 ) =>{
   
     //returning action gen function
-    return (dispatch)=>{
+    return (dispatch,getState)=>{
       ///saving data in firebase
+      const uid = getState().auth.uid;
    const expense ={description,note,amount,createdAt};
    return database
-     .ref('expenses')
+     .ref(`users/${uid}/expenses`)
     .push(expense)
     .then((ref)=>{
         //when promise resolved we will dispatch
@@ -41,8 +42,9 @@ export const removeExpense = ({id}  = {}) => ({
 })
 
 export const startRemoveExpense = ({id}={})=>{
-  return (dispatch)=>{
-    return  database.ref(`expenses/${id.id}`)
+  return (dispatch,getState)=>{
+    const uid = getState().auth.uid;
+    return  database.ref(`users/${uid}/expenses/${id.id}`)
     .remove() 
       .then(()=> {
         //   console.log({id})
@@ -61,9 +63,9 @@ export const editExpense = (id, update) => ({
 })
 
 export const startEditExpense = (id, update)=>{
-    return (dispatch)=>{
-        console.log('edit'+id)
-    return database.ref(`expenses/${id}`).update({
+    return (dispatch,getState)=>{
+        const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/expenses/${id}`).update({
         id,
         ...update
     }).then(()=>{
@@ -80,9 +82,9 @@ export const setExpenses=(expenses)=>({
 });
 
 export const startSetExpenses =()=>{
-    return (dispatch)=>{
-
-    return  database.ref('expenses')
+    return (dispatch,getState)=>{
+  const uid = getState().auth.uid;
+    return  database.ref(`users/${uid}/expenses`)
    .once('value')
    .then((snapshot)=>{
        const expenses = [];

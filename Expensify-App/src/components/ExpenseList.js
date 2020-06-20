@@ -8,8 +8,8 @@ export const  ExpenseList = (props) =>{
        
         <div>
         
-       <h1>ExpenseList</h1>
-       {props.expenses.length}
+      
+       {props.expenses.length? <h1>ExpenseList</h1>: <h1>No Expense</h1>}
        {props.expenses.map((expense)=>{
            return <ExpenseListItem key={expense.id}{...expense}/>
        })

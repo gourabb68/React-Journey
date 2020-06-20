@@ -9,7 +9,7 @@ export const Header =(props) =>{
      <div>
      <NavLink to="/dashboard" activeClassName="is-active" >Dashboard </NavLink>           
         <NavLink to="/create"activeClassName="is-active">Create Page</NavLink>
-        <NavLink to="/help" activeClassName="is-active">Help Page</NavLink>
+        {/* <NavLink to="/help" activeClassName="is-active">Help Page</NavLink> */}
         <button onClick={props.startLogout}>Logout</button>
      </div>
      </header>
