@@ -14,12 +14,13 @@ import 'react-dates/lib/css/_datepicker.css';
 import './firebase/firebase';
 import './playground/promises'
 import { firebase } from './firebase/firebase'
+import {login,logout} from './actions/auth';
 const store = configureStore();
 
 // store.dispatch(addExpense({description: 'water bill', amount: 5520,createdAt: 20}))
 // store.dispatch(addExpense({description: 'gas bill',amount: 552,createdAt: 30}))
 // store.dispatch(addExpense({description: 'electric bill',amount: 6000,createdAt: 10}))
-store.dispatch(setTextFilter('bill'));
+// store.dispatch(setTextFilter('bill'));
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpenses);
@@ -50,8 +51,10 @@ firebase.auth().onAuthStateChanged((user) => {
     //this callback funtion runs when authentication
     //status changed like login to logout vice versa
     if (user) {
+        store.dispatch(login(user.uid));
         //if login
         console.log('login');
+        // console.log('uid', user.uid)
         //when the expense is fetched we will show it
         store.dispatch(startSetExpenses()).then(() => {
             // console.log(store.getState())
@@ -64,6 +67,7 @@ firebase.auth().onAuthStateChanged((user) => {
 
         });
     } else {
+        store.dispatch(logout());
         //when log out no user
         renderApp();
         console.log('logout');
