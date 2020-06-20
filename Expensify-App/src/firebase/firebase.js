@@ -16,7 +16,11 @@ const firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
   const database = firebase.database();
-  export {firebase,database as default}
+
+
+  //creating provider for oauth 
+  const googleAuthProvider= new firebase.auth.GoogleAuthProvider();
+  export {firebase,googleAuthProvider,database as default}
 // //   //testing connection
 // //   //geting ref of root of data base
 // //   database.ref().set({
