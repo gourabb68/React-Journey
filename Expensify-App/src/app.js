@@ -15,6 +15,7 @@ import './firebase/firebase';
 import './playground/promises'
 import { firebase } from './firebase/firebase'
 import {login,logout} from './actions/auth';
+import LoadingPage from './components/LoadingPage';
 const store = configureStore();
 
 // store.dispatch(addExpense({description: 'water bill', amount: 5520,createdAt: 20}))
@@ -35,7 +36,7 @@ const jsx = (
 );
 
 //render loading message untill we get the data from firebase
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 
 let hasRendered = false;

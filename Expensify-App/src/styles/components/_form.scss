@@ -1,0 +1,12 @@
+.form{
+  display: flex;
+  flex-direction: column;
+  > * {//looking for all children..
+    margin-bottom: $s-size;;
+  }
+}
+
+.form_error{
+   margin: 0 0 $s-size 0;
+   font-style: italic;
+}
