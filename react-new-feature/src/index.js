@@ -1,51 +1,51 @@
-import React,{useState} from 'react';//useState hook
+import React,{useState,useEffect} from 'react';//useState hook
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 
 
-const NoteApp =()=>{
-  const [notes, setNotes]=useState([]);
-  const [title,setTitle]=useState('');
-  const [body,setBody]=useState('');
-  const addNote =(e)=>{
-       e.preventDefault();
-       setNotes([
+// const NoteApp =()=>{
+//   const [notes, setNotes]=useState([]);
+//   const [title,setTitle]=useState('');
+//   const [body,setBody]=useState('');
+//   const addNote =(e)=>{
+//        e.preventDefault();
+//        setNotes([
 
-         ...notes,
-         {
-           title,body
-         }
+//          ...notes,
+//          {
+//            title,body
+//          }
         
-       ])
-       setTitle('')
-  }
-  const remove =(title,body)=>{
-    // console.log('rm'+title)
-    setNotes(notes.filter((note)=>note.title!==title))
-    setBody(notes.filter((note)=>note.body!==body))
-  }
-  return(
-     <div>
-       <h1>Notes</h1>
-       {notes.map((note)=>(
-         <div key={note.title}>
-           <h3>{note.title}</h3>
-           <h3>{note.body}</h3>
-           <button onClick={()=>remove(note.title,note.body)}>Remove</button>
-           </div>
-       ))}
-       <p>Add Note</p>
-       <form onSubmit={addNote}>
-         <input value={title} onChange={(e)=> setTitle(e.target.value)}/>
-         <textarea placeholder=
-                    'Add a note for your expense'
-                    value={body}
-                    onChange={(e)=>setBody(e.target.value)}></textarea>
-         <button > Add Note</button>
-       </form>
-     </div>
-  )
-}
+//        ])
+//        setTitle('')
+//   }
+//   const remove =(title,body)=>{
+//     // console.log('rm'+title)
+//     setNotes(notes.filter((note)=>note.title!==title))
+//     setBody(notes.filter((note)=>note.body!==body))
+//   }
+//   return(
+//      <div>
+//        <h1>Notes</h1>
+//        {notes.map((note)=>(
+//          <div key={note.title}>
+//            <h3>{note.title}</h3>
+//            <h3>{note.body}</h3>
+//            <button onClick={()=>remove(note.title,note.body)}>Remove</button>
+//            </div>
+//        ))}
+//        <p>Add Note</p>
+//        <form onSubmit={addNote}>
+//          <input value={title} onChange={(e)=> setTitle(e.target.value)}/>
+//          <textarea placeholder=
+//                     'Add a note for your expense'
+//                     value={body}
+//                     onChange={(e)=>setBody(e.target.value)}></textarea>
+//          <button > Add Note</button>
+//        </form>
+//      </div>
+//   )
+// }
 
 // //trying to create state as class using singl useState call
 // const App = (props) =>{
@@ -65,34 +65,47 @@ const NoteApp =()=>{
 //     )
 //   }
   
-// const App = (props) =>{
-// const [count,setCount]=useState(props.count);
-// const [text,setText]=useState('');//2nd state value
-// const increment = ()=>{
-//   setCount(count+1);
-// }
-// const decrement = ()=>{
-//   setCount(count-1);
-// }
-// const reset = ()=>{
-//   setCount(props.count);
-// }
-//   return (
-//     <div>
-//       <p> The current {text || count} is {count}</p>
-//       <button onClick={increment}> +1</button>
-//       <button onClick={decrement}> -1</button>
-//       <button onClick={reset}> reset</button>
-//       <input value={text} onChange={(e)=> setText(e.target.value)}></input>
-//     </div>
-//   )
-// }
+const App = (props) =>{
+const [count,setCount]=useState(props.count);
+const [text,setText]=useState('');//2nd state value
 
-// App.defaultProps ={
-//   count:10
-// }
+useEffect(()=>{
+  console.log('This should ran once')
+},[])//it is depended on  nothing means it will run only once 
+//at the beginning componentDidMount
+
+useEffect(()=>{//useEffect is combination with
+  // componentDidMount() and componentDidUpdate()
+  document.title = count;
+  console.log("useEffect ran")
+},[count])
+
+
+const increment = ()=>{
+  setCount(count+1);
+}
+const decrement = ()=>{
+  setCount(count-1);
+}
+const reset = ()=>{
+  setCount(props.count);
+}
+  return (
+    <div>
+      <p> The current {text || count} is {count}</p>
+      <button onClick={increment}> +1</button>
+      <button onClick={decrement}> -1</button>
+      <button onClick={reset}> reset</button>
+      <input value={text} onChange={(e)=> setText(e.target.value)}></input>
+    </div>
+  )
+}
+
+App.defaultProps ={
+  count:10
+}
 ReactDOM.render(
- <NoteApp />,
+ <App />,
   document.getElementById('root')
 );
 
