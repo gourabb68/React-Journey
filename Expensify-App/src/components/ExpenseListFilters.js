@@ -34,10 +34,10 @@ class ExpenseListFilters extends React.Component {
                         }} />
                     </div>
                     <div className="input-group__item">
-                        <select className="select"onChange={(e) => {
+                        <select className="select" onChange={(e) => {
                             console.log(e.target.value)
                             if (e.target.value === 'date') {
-                                props.dispatch(sortByAmount());
+                                this.props.dispatch(sortByAmount());
                             } else if (e.target.value === 'amount') {
                                 this.props.dispatch(sortByDate());
                             }

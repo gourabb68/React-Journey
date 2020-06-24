@@ -17,7 +17,7 @@ module.exports =(env)=>{
     //creating instance and passing name of the file where it is going to dump css file
     const CSSExtract = new  ExtractTextPlugin('styles.css');
     return {
-    "entry": "./src/app.js",//put the source file..main file ..where should webpack start from
+    "entry": ['babel-polyfill',"./src/app.js"],//put the source file..main file ..where should webpack start from
     // "entry": "./src/playground/hoc.js",
     "output":{
         "path": path.join(__dirname,'public','dist'),  //absolute path from root user complete path 
