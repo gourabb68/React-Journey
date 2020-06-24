@@ -1,15 +1,33 @@
-import React from 'react';
+import React,{useState} from 'react';//useState hook
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-//serivce worker also is a  another feature of
-//progressive web app it does support notification etc
+
+const App = () =>{
+const [count,setCount]=useState(0);
+
+const increment = ()=>{
+  setCount(count+1);
+}
+const decrement = ()=>{
+  setCount(count-1);
+}
+const reset = ()=>{
+  setCount(0);
+}
+  return (
+    <div>
+      <p> The current count is {count}</p>
+      <button onClick={increment}> +1</button>
+      <button onClick={decrement}> -1</button>
+      <button onClick={reset}> reset</button>
+
+    </div>
+  )
+}
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+ <App />,
   document.getElementById('root')
 );
 
